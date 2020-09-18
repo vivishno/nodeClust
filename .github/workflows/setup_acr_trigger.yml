@@ -3,7 +3,7 @@ on:
     paths:
       - '.github/workflows/setup_acr_trigger.yml'  
         
-# CONFIGURATION
+# CONFIGURATION 
 #
 # 1. Set up the following secrets in your repository:
 #   RESOURCE_GROUP
