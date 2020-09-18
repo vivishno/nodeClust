@@ -47,9 +47,9 @@ jobs:
         helmChart: './charts/sampleapp/' 
         overrideFiles: './charts/sampleapp/values.yaml'
         overrides: |     
-          image.repository: ${{ env.REPO_NAME }}
+          image.repository:${{ env.REPO_NAME }}
           image.tag:${{ env.REPO_VERSION }}
-        releaseName: test012
+        releaseName: test0125
       id: bake
 
     - uses: Azure/k8s-deploy@v1
