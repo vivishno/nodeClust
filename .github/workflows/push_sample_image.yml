@@ -1,7 +1,7 @@
 on: 
  push: 
   paths:
-   - '.github/workflows/push_sample_image.yml'  
+   - '.github/workflows/push_sample_image.yml'   
      
 # CONFIGURATION
 #, 
