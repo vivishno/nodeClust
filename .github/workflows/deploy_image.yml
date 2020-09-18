@@ -47,8 +47,8 @@ jobs:
         helmChart: './charts/sampleapp/' 
         overrideFiles: './charts/sampleapp/values.yaml'
         overrides: |     
-          image.repository: "${{ env.REPO_NAME }}"
-          image.tag: "${{ env.REPO_VERSION }}"
+          image.repository: ${{ env.REPO_NAME }}
+          image.tag:${{ env.REPO_VERSION }}
         releaseName: test012
       id: bake
 
