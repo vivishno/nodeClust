@@ -3,10 +3,10 @@ on:
     paths:
       - '.github/workflows/setup_acr_trigger.yml'  
         
-# CONFIGURATION
+# CONFIGURATION 
 #
 # 1. Set up the following secrets in your repository:
-#   RESOURCE_GROUP
+#   RESOURCE_GROUP 
 #   CONTAINER_REGISTRY_NAME
 env:
  RESOURCE_GROUP: try1       #set this to your resource group name      
