@@ -1,0 +1,40 @@
+name: CI
+on:
+  repository_dispatch:
+    types: [containerregistry-imagepushed]
+     
+# CONFIGURATION
+# Set up the following secrets in your repository:
+#
+#   CLUST_NAME
+#   RESOURCE_GROUP
+env:
+   AZURE_WEBAPP_NAME: myappvivek123       #set this to your kubernetes cluster name 
+   RESOURCE_GROUP: try1    #set this to your resource group name
+env:
+   AZURE_WEBAPP_NAME: myappvivek123               #set this to your kubernetes cluster name 
+   RESOURCE_GROUP: try1    #set this to your resource group name
+   HOST_NAME: ${{ github.event.client_payload.data.request.host }}
+   REPO_NAME: ${{ github.event.client_payload.data.request.host }}/${{ github.event.client_payload.data.target.repository }}
+   REPO_VERSION: ${{ github.event.client_payload.data.target.tag }}
+   IMAGE_NAME: ${{ github.event.client_payload.data.request.host }}/${{ github.event.client_payload.data.target.repository }}:${{ github.event.client_payload.data.target.tag }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Azure authentication
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS  }}    
+    #- name: Check tag filter 
+     # run: |
+      #  if [ "$repo_version" != "$filter" ]; then echo "incorrect tag filter supplied"; exit 1 ; fi;
+          
+    - name: 'Deploy to Azure Web App for Container'
+      uses: azure/webapps-deploy@v2
+      with: 
+        app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+        images: ${{ env.IMAGE_NAME }}
+        startup-command: 'npm start'    # Include start up command to start the app container
