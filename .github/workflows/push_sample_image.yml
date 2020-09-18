@@ -24,6 +24,5 @@ jobs:
             password: ${{ secrets.REGISTRY_PASSWORD }}
             
         - run: |
-            docker pull hello-world
-            docker tag hello-world:latest ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io/sample_image:v1
-            docker push ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io/sample_image:v1
+            docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io/sample_image:1
+            docker push ${{ env.CONTAINER_REGISTRY_NAME }}.azurecr.io/sample_image:1
