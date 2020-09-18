@@ -9,7 +9,7 @@ on:
 #   CLUST_NAME
 #   RESOURCE_GROUP
 env:
-   AZURE_WEBAPP_NAME: myappvivek123               #set this to your kubernetes cluster name 
+   AZURE_WEBAPP_NAME: myappvivek1234               #set this to your kubernetes cluster name 
    RESOURCE_GROUP: try1    #set this to your resource group name
    HOST_NAME: ${{ github.event.client_payload.data.request.host }}
    REPO_NAME: ${{ github.event.client_payload.data.request.host }}/${{ github.event.client_payload.data.target.repository }}
