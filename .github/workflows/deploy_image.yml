@@ -9,9 +9,6 @@ on:
 #   CLUST_NAME
 #   RESOURCE_GROUP
 env:
-   AZURE_WEBAPP_NAME: myappvivek123       #set this to your kubernetes cluster name 
-   RESOURCE_GROUP: try1    #set this to your resource group name
-env:
    AZURE_WEBAPP_NAME: myappvivek123               #set this to your kubernetes cluster name 
    RESOURCE_GROUP: try1    #set this to your resource group name
    HOST_NAME: ${{ github.event.client_payload.data.request.host }}
@@ -31,6 +28,28 @@ jobs:
     #- name: Check tag filter 
      # run: |
       #  if [ "$repo_version" != "$filter" ]; then echo "incorrect tag filter supplied"; exit 1 ; fi;
+    - name: Set Web App ACR authentication
+      uses: Azure/appservice-settings@v1
+      with:
+         app-name: ${{ env.AZURE_WEBAPP_NAME }} 
+         app-settings-json: |
+           [
+               {
+                   "name": "DOCKER_REGISTRY_SERVER_PASSWORD",
+                   "value": "${{ secrets.REGISTRY_PASSWORD }}",
+                   "slotSetting": false
+               },
+               {
+                   "name": "DOCKER_REGISTRY_SERVER_URL",
+                   "value": "https://${{ env.HOST_NAME }}",
+                   "slotSetting": false
+               },
+               {
+                   "name": "DOCKER_REGISTRY_SERVER_USERNAME",
+                   "value": "${{ secrets.REGISTRY_USERNAME  }}",
+                   "slotSetting": false
+               }
+           ]
           
     - name: 'Deploy to Azure Web App for Container'
       uses: azure/webapps-deploy@v2
