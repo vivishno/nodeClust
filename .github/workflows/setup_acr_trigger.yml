@@ -1,4 +1,4 @@
-on: 
+on:
  push:
     paths:
       - '.github/workflows/setup_acr_trigger.yml'  
