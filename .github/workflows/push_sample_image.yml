@@ -2,7 +2,7 @@ on:
  push: 
   paths:
    - '.github/workflows/push_sample_image.yml'   
-     
+      
 # CONFIGURATION
 #,  
 # 1. Set up the following secrets in your repository:
